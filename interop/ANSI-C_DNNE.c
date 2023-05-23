@@ -22,7 +22,11 @@ int main(void)
     iError = SetData(strTextIn, iNumberIn, dNumberIn);
     iError = GetXMLString(strPathToXMLFile1, &StringXMLReturn);
 
-    printf("content: %s", StringXMLReturn);
+    printf("content before free: %s\n", StringXMLReturn);
+    iError = FreeAnsiString(StringXMLReturn);
+
+    
+    printf("content after free: %s\n", StringXMLReturn);
 
     return 0;
 }

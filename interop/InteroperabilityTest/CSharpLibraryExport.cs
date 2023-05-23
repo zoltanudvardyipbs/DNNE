@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace InteroperabilityTest
 {
@@ -29,6 +30,23 @@ namespace InteroperabilityTest
             var returnValue = CSharpLibrary.GetXMLString(Marshal.PtrToStringAnsi(strPathToXMLFile), out string StringXMLReturn);
             Marshal.WriteIntPtr(ReturnStringXMLReturn, Marshal.StringToHGlobalAnsi(StringXMLReturn));
             return returnValue;
+        }
+
+        [UnmanagedCallersOnlyAttribute(EntryPoint = "FreeAnsiString")] //functions name for C interface
+        public static int FreeAnsiString([DNNE.C99Type("const char**")] System.IntPtr stringPtr)
+        {
+            try
+            {
+                Marshal.FreeHGlobal(stringPtr);
+                return (int)CSharpLibrary.ErrorCode.eNO_ERROR;
+            }
+            catch (Exception ExceptionObjet)
+            {
+                Console.WriteLine(ExceptionObjet.Message);
+                Console.WriteLine(ExceptionObjet.StackTrace);
+
+                return (int)CSharpLibrary.ErrorCode.eERROR;
+            }
         }
 
     }

@@ -16,17 +16,18 @@ int main(void)
     double dNumberIn = 23.123456;
 
     char strPathToXMLFile1[] = "File.xml";
-    char *StringXMLReturn = NULL;
+    char *strXMLReturn = NULL;
 
     iError = GetData(&strTextOut, &iNumberOut, &dNumberOut);
+    iError = FreeAnsiString(strTextOut);
+
     iError = SetData(strTextIn, iNumberIn, dNumberIn);
-    iError = GetXMLString(strPathToXMLFile1, &StringXMLReturn);
+    iError = GetXMLString(strPathToXMLFile1, &strXMLReturn);
 
-    printf("content before free: %s\n", StringXMLReturn);
-    iError = FreeAnsiString(StringXMLReturn);
-
+    printf("content before free: %s\n", strXMLReturn);
+    iError = FreeAnsiString(strXMLReturn);
     
-    printf("content after free: %s\n", StringXMLReturn);
+    printf("content after free: %s\n", strXMLReturn);
 
     return 0;
 }

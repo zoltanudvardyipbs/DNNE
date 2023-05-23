@@ -43,7 +43,6 @@ namespace InteroperabilityTest
                 doc.Load(strPathToXMLFile);
 
                 XmlElement xmlRoot = doc.DocumentElement;
-                Console.WriteLine("xmlRoot:\n " + xmlRoot);
 
                 XmlNodeList elemList = xmlRoot.GetElementsByTagName("item");
                 stringXMLReturn = elemList[0].Attributes[0].Value;

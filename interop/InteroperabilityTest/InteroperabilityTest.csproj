@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifiers>linux-x64</RuntimeIdentifiers>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DnneGenerateExports>true</DnneGenerateExports>
+
+    <!-- If the build is disabled, the generated source is considered the output
+        and emitted in the output directory as if it were a binary. -->
+    <DnneBuildExports>true</DnneBuildExports>
+
+    <!-- This suffix is needed to ensure the uniqueness of the generated
+        binary and the existing managed assembly. Technically, this is only
+        needed on Windows since native binaries on non-Windows platform
+        don't use '.dll'. -->
+    <DnneNativeBinarySuffix>NE</DnneNativeBinarySuffix>
+
+    <!-- Logging level passed to output from the DNNE build process. -->
+    <DnneMSBuildLogging>low</DnneMSBuildLogging>
+
+    <!-- Add the generated binary to the project contents -->
+    <DnneAddGeneratedBinaryToProject>false</DnneAddGeneratedBinaryToProject>
+
+    <!-- Enable a workaround for https://github.com/dotnet/sdk/issues/1675 -->
+    <DnneWorkAroundSdk1675>true</DnneWorkAroundSdk1675>
+
+    <!-- Set to override the computed native compiler command.
+        This value will be placed in double quotes (e.g. "command") and passed
+        the computed compiler arguments. -->
+    <DnneCompilerCommand></DnneCompilerCommand>
+
+    <!-- Set to add additional include paths to use during the native build.
+        The directories should be semicolon (e.g. C:\Foo;D:\Bar) delimited.
+        These additional directories are appended to the end of the compiler
+        search paths. -->
+    <DnneAdditionalIncludeDirectories></DnneAdditionalIncludeDirectories>
+
+    <!-- Indicate the dnne-gen tool's roll forward policy. -->
+    <DnneGenRollForward>Minor</DnneGenRollForward>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="DNNE" Version="2.0.1" />
+  </ItemGroup>
+
+</Project>
